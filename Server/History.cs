@@ -20,12 +20,33 @@ namespace Server
             Main = main;
         }
 
-        private void txtHistory_TextChanged(object sender, EventArgs e)
+   
+
+        private void btnHistory_Click(object sender, EventArgs e)
         {
-           
-    
+            //подключаюсь к бд и не пойму почему так не работает
+            using (MessageContext db = new MessageContext())
+            {
+                foreach (var item in db.Messages)
+                {
+
+                    for (int i = 0; i < listMessage.Items.Count; i++)
+                    {
+                        listMessage.Items[i].SubItems[1].Text = item.UserName;
+                        listMessage.Items[i].SubItems[2].Text = item.DateTimeMessage.ToString();
+                        listMessage.Items[i].SubItems[3].Text = item.UserMessage;
+                    }
+                    
+                }
+            
 
 
+            }
+        }
+
+        private void listMessage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
         }
     }
 }
